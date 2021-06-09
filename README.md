@@ -1,5 +1,8 @@
 # wavgenerator
 This is a WAV File built from scratch while i was bored with the ability to generate sounds
+# Note
+the gen.wav file is coming with the repository ,it shows an example of the sine algorithm
+
 # built-in sound generation formulas
 * sine (default)
 * love graph combined with sine (not recomended because of slow performance)
