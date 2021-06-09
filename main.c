@@ -24,7 +24,14 @@ typedef struct{
 int sec_to_sample(int sec){
 	return sec * SR;
 }
+double cubeRoot(double n) {
+   double i, precision = 0.000001;
 
+   for(i = 1; (i*i*i) <= n; ++i);
+   for(--i; (i*i*i) < n; i += precision);      
+
+   return i;
+}
 wav init_wav(int size){
 	wav wav_s;
 	wav_s.chunkid = 'FFIR'; // They need to be reversed i still do not know why
@@ -62,7 +69,17 @@ int main(void){
 	wav_s = init_wav(size);
 	float samples[size];
 	// a*sin((2pi*f*x)/ samplerate)
-	for(float x =0;x < (float)size;x++){samples[(int)x] = (amp * sin( (x * 2* M_PI * freq + teta )/SR )); }
+
+	for(float x =0;x < (float)size;x++){samples[(int)x] = (amp * sin( (x * 2* M_PI * freq + teta )/SR )); } // Sine formula
+
+	// (y - cuberoot of x**2)**2 + x**2    and let y be the sine formula
+	
+	// for(float x =0;x < (float)size;x++){
+		// float sinres = (amp * sin( (x * 2* M_PI * freq + teta )/SR ));
+		// float firstres = ( sinres - cubeRoot(x*x) );
+		// samples[(int)x] = firstres*firstres + x*x ;
+// 
+	// } // Love Graph formula combined with sine formula (VERY SLOW NOT RECOMMENDED)
 
 	FILE* fp;
 	fp = fopen("gen.wav","wb");
