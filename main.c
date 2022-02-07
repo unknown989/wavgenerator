@@ -24,12 +24,11 @@ typedef struct{
 int sec_to_sample(int sec){
 	return sec * SR;
 }
-double cubeRoot(double n) {
-   double i, precision = 0.000001;
+double cubeRoot(double n){
+   double i, precision = 0.000001;
 
    for(i = 1; (i*i*i) <= n; ++i);
-   for(--i; (i*i*i) < n; i += precision);      
-
+   for(--i; (i*i*i) < n; i += precision);
    return i;
 }
 wav init_wav(int size){
